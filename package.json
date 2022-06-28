@@ -1,0 +1,50 @@
+{
+  "name": "react-router-map",
+  "version": "0.1.0",
+  "description": "Combine react-router-dom with configs, guard functions, inspire of angular router architecture",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "source": "./src/index.ts",
+  "author": "Hoang Do",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aaaahoang123/react-hook-guard"
+  },
+  "keywords": [
+    "react",
+    "react-router-dom",
+    "react-router",
+    "guard",
+    "middleware",
+    "config",
+    "relative",
+    "angular",
+    "angular inspire",
+    "multi layouts",
+    "hook"
+  ],
+  "devDependencies": {
+    "@types/path-browserify": "^1.0.0",
+    "@types/react": "^17.0.9",
+    "@types/react-dom": "^17.0.6",
+    "@types/react-router-dom": "^5.1.7",
+    "path-browserify": "^1.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "typescript": "^4.3.2"
+  },
+  "scripts": {
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "build:esm": "tsc"
+  },
+  "peerDependencies": {
+    "path-browserify": "^1.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0"
+  }
+}
