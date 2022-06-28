@@ -6,12 +6,8 @@
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
   "source": "./src/index.ts",
-  "author": "Hoang Do",
+  "author": "HappyTime",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aaaahoang123/react-hook-guard"
-  },
   "keywords": [
     "react",
     "react-router-dom",
