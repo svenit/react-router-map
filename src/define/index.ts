@@ -98,10 +98,11 @@ export interface RouterGuardExtraRoutes {
 
 export declare type RouteConfig = Route & { absolutePath: string };
 
-export declare type RouteParamsQueries = {
+export declare type RouterExtractParams = {
   [key: string]: string | number | boolean | undefined;
 };
 export interface NavigateOptions {
-  params?: RouteParamsQueries;
-  queries?: RouteParamsQueries;
+  params?: RouterExtractParams;
+  queries?: RouterExtractParams;
+  state?: RouterExtractParams;
 }

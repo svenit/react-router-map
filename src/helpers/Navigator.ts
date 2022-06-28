@@ -92,7 +92,7 @@ class Navigator {
    */
   public static push(path: string, options?: NavigateOptions): void {
     const redirectToPath = this.resolvePath(path, options);
-    this.history.push(redirectToPath);
+    this.history.push(redirectToPath, options?.state);
   }
 
   /**
@@ -106,7 +106,7 @@ class Navigator {
     }
     const { absolutePath }: RouteConfig = this.getPathName(routeName);
     const redirectToPath = this.resolvePath(absolutePath, options, "/");
-    this.history.push(redirectToPath);
+    this.history.push(redirectToPath, options?.state);
   }
 }
 
