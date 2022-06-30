@@ -1,9 +1,10 @@
 import { memo, useMemo } from "react";
-import { Route as RouteComponent, Switch } from "react-router-dom";
+import { Route as RouteComponent, Switch, useHistory } from "react-router-dom";
 import { Route, RouteWithCommand, WithRoutesProps } from "../define";
 import ProtectedContent from "./ProtectedContent";
 import { resolveRoute } from "../utils";
 import { extraRoutes } from "../config";
+import Navigator from "../helpers/Navigator";
 
 export interface RouterOutletProps extends WithRoutesProps {
   parentRoute?: Route;
@@ -11,6 +12,13 @@ export interface RouterOutletProps extends WithRoutesProps {
 }
 
 const RouterOutlet = memo(({ routes, parentRoute, relativeMode }: RouterOutletProps) => {
+  const history = useHistory();
+
+  /**
+   * Initialize navigator helper
+   */
+  routes && new Navigator(routes, history);
+
   const resolvedRoutes = useMemo(() => {
     const result = routes?.map((route) => resolveRoute(route, parentRoute, relativeMode)) ?? [];
 

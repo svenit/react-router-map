@@ -7,10 +7,10 @@ class Navigator {
   private static paths = new Map();
   private static history: History.History<unknown>;
 
-  static make(routes: Routes, history: History.History<unknown>) {
-    if (!this.isInitialize) {
-      this.history = history;
-      this.bindRoutes(routes);
+  constructor(routes: Routes, history: History.History<unknown>) {
+    if (!Navigator.isInitialize) {
+      Navigator.history = history;
+      Navigator.bindRoutes(routes);
     }
   }
 
@@ -64,13 +64,18 @@ class Navigator {
   }
 
   /**
-   * Get absolute path from path string
-   * @param path
+   * Get absolute path from a route name
+   * @param routeName
    * @param options
    * @returns
    */
-   public static resolvePath(path: string, options?: NavigateOptions, prefix: string = ""): string {
-    let redirectToPath = generatePath(path, options?.params);
+  public static resolvePath(routeName: string, options?: NavigateOptions): string {
+    if (!this.hasPathName(routeName)) {
+      throw Error("Path name does not exists");
+    }
+    const { absolutePath }: RouteConfig = this.getPathName(routeName);
+    const prefix = "/";
+    let redirectToPath = generatePath(absolutePath, options?.params);
     let queryString = "";
     if (options?.queries && Object.keys(options.queries).length) {
       Object.entries(options.queries).forEach(([key, value], index) => {
@@ -86,27 +91,23 @@ class Navigator {
   }
 
   /**
-   * Go to a path
-   * @param path
+   * Go to a absolute path by a given route name
+   * @param routeName
    * @param options
    */
-  public static push(path: string, options?: NavigateOptions): void {
-    const redirectToPath = this.resolvePath(path, options);
+  public static push(routeName: string, options?: NavigateOptions): void {
+    const redirectToPath = this.resolvePath(routeName, options);
     this.history.push(redirectToPath, options?.state);
   }
 
   /**
-   * Go to a path by a given name
+   * Replace current path to absolute path by a given route name
    * @param routeName
    * @param options
    */
-  public static pushByName(routeName: string, options?: NavigateOptions): void {
-    if (!this.hasPathName(routeName)) {
-      throw Error("Path name does not exists");
-    }
-    const { absolutePath }: RouteConfig = this.getPathName(routeName);
-    const redirectToPath = this.resolvePath(absolutePath, options, "/");
-    this.history.push(redirectToPath, options?.state);
+  public static replace(routeName: string, options?: NavigateOptions): void {
+    const redirectToPath = this.resolvePath(routeName, options);
+    this.history.replace(redirectToPath, options?.state);
   }
 }
 

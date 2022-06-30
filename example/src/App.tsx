@@ -1,11 +1,12 @@
 import "./App.css";
-import { RouterRoot } from "react-hook-guard";
+import { RouterOutlet } from "react-hook-guard";
 import { withRouter } from "react-router-dom";
+import routes from "./routes";
 
 function App() {
   return (
     <div className="App">
-      <RouterRoot />
+      <RouterOutlet routes={routes} relativeMode={true} />
     </div>
   );
 }

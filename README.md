@@ -154,7 +154,7 @@ const appRoutes: Routes = [
 
 function App() {
     // Ignore relativeMode property if you want to use absolute route paths
-    return <RouterProvider routes={appRoutes} relativeMode={true}/>;
+    return <RouterOutlet routes={appRoutes} relativeMode={true}/>;
 }
 ```
 

@@ -4,7 +4,7 @@ declare class Navigator {
     private static isInitialize;
     private static paths;
     private static history;
-    static make(routes: Routes, history: History.History<unknown>): void;
+    constructor(routes: Routes, history: History.History<unknown>);
     private static bindRoutes;
     private static setupPath;
     private static pushPath;
@@ -26,23 +26,23 @@ declare class Navigator {
      */
     static hasPathName(routeName: string): boolean;
     /**
-     * Get absolute path from path string
-     * @param path
+     * Get absolute path from a route name
+     * @param routeName
      * @param options
      * @returns
      */
-    static resolvePath(path: string, options?: NavigateOptions, prefix?: string): string;
+    static resolvePath(routeName: string, options?: NavigateOptions): string;
     /**
-     * Go to a path
-     * @param path
-     * @param options
-     */
-    static push(path: string, options?: NavigateOptions): void;
-    /**
-     * Go to a path by a given name
+     * Go to a absolute path by a given route name
      * @param routeName
      * @param options
      */
-    static pushByName(routeName: string, options?: NavigateOptions): void;
+    static push(routeName: string, options?: NavigateOptions): void;
+    /**
+     * Replace current path to absolute path by a given route name
+     * @param routeName
+     * @param options
+     */
+    static replace(routeName: string, options?: NavigateOptions): void;
 }
 export default Navigator;
