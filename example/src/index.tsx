@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./guards/AuthProvider";
-import reactHookGuard from "react-hook-guard";
+import reactHookGuard from "react-router-map";
 import Spin from "./components/Spin";
 import AccessDenied from "./components/AccessDenied";
 import NotFound from "./components/NotFound";

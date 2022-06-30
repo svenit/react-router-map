@@ -1,4 +1,4 @@
-import {RouterOutlet} from 'react-hook-guard';
+import {RouterOutlet} from 'react-router-map';
 
 function WithoutNavbarLayout(props: any) {
     return (

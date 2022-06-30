@@ -1,4 +1,4 @@
-import { Navigator } from "react-hook-guard";
+import { Navigator } from "react-router-map";
 import { browserHistory } from "..";
 import { useAuth } from "../guards/AuthProvider";
 import { routeNames } from "../routes";

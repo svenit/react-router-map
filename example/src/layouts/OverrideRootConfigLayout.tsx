@@ -1,4 +1,4 @@
-import {RouterOutlet} from 'react-hook-guard';
+import {RouterOutlet} from 'react-router-map';
 import Component4 from '../components/Component4';
 
 function OverrideRootConfigLayout({...props}: any) {

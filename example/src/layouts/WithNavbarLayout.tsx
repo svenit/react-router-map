@@ -1,4 +1,4 @@
-import {RouterOutlet} from 'react-hook-guard';
+import {RouterOutlet} from 'react-router-map';
 import { Link } from 'react-router-dom';
 import {useAuth} from '../guards/AuthProvider';
 

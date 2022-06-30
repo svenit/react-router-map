@@ -1,4 +1,4 @@
-# react-hook-guard
+# react-router-map
 
 > Implement react-route-dom with configuration
 
@@ -10,7 +10,7 @@
 
 > Relative mode supported for config route
 
-React Hook Guards provides angular-like to implement the [React Router](https://reacttraining.com/react-router/),
+React Router Map provides angular-like to implement the [React Router](https://reacttraining.com/react-router/),
 allowing you to perform complex logics in various hooks to guards your router.
 
 ## Table of Contents
@@ -33,23 +33,23 @@ This package has the following [peer dependencies](https://docs.npmjs.com/files/
 With [npm](https://www.npmjs.com):
 
 ```shell
-$ npm install react-hook-guard
+$ npm install react-router-map
 ```
 
 With [yarn](https://yarnpkg.com/):
 
 ```shell
-$ yarn add react-hook-guard
+$ yarn add react-router-map
 ```
 
 Then with a module bundler like [webpack](https://webpack.github.io/), use as you would anything else:
 
 ```js
 // using ES6 modules
-import {RouterOutlet} from 'react-hook-guard';
+import {RouterOutlet} from 'react-router-map';
 
 // using CommonJS modules
-const RouterOutlet = require('react-hook-guard').RouterOutlet;
+const RouterOutlet = require('react-router-map').RouterOutlet;
 ```
 
 ## Basic usage
@@ -58,7 +58,7 @@ Here is a very basic example of how to use React Hook Guard.
 
 ```tsx
 // App.tsx
-import {Route, Routes, WithRouteProps, RouterOutlet} from 'react-hook-guard';
+import {Route, Routes, WithRouteProps, RouterOutlet} from 'react-router-map';
 import {lazy, useContext, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {useHistory} from 'react-router';
@@ -160,7 +160,7 @@ function App() {
 
 ## Customize fallback components
 
-By default, react-hook-guard will not redirect you to any other route, if the guard functions return false, a default
+By default, react-router-map will not redirect you to any other route, if the guard functions return false, a default
 empty component will be returned
 
 ```tsx
@@ -206,7 +206,7 @@ const matchAllRoute = {
 }
 
 // index.tsx
-import reactHookGuard from 'react-hook-guard';
+import reactHookGuard from 'react-router-map';
 
 reactHookGuard.config({
     // Suspense component will be use to Suspense the lazyload components
@@ -214,10 +214,10 @@ reactHookGuard.config({
     // Can't Activate component will be use when the route can not be access
     CantActivateFallback,
     // This config allow you config a global page when not found any matches routes
-    // Under the hood, react-hook-guard will auto create an extra relative route like the configured to each RouterOutlet
+    // Under the hood, react-router-map will auto create an extra relative route like the configured to each RouterOutlet
     // So if you want to use specific matchAllRoute for specific RouterOutlet
     // just provide the last route with the same `path` and `exact` with the global that you configured,
-    // react-hook-guard will auto ignore the global if `the last route in a `chilren` array`
+    // react-router-map will auto ignore the global if `the last route in a `chilren` array`
     // is the same pathMatch with the global
     matchAllRoute,
 });
@@ -229,7 +229,7 @@ reactHookGuard.config({
 By default, react-router-dom 5 doesn't support relative `<Link />` component, this package will support the relative link with current route match.
 
 ```tsx
-import {RelativeLink} from "react-hook-guard";
+import {RelativeLink} from "react-router-map";
 
 const HaveRelativeLinkComponent = () => {
     // E.g: The path is /app/:foo/:bar
@@ -243,8 +243,10 @@ const HaveRelativeLinkComponent = () => {
 
 We also provide another hook for navigating relatively
 
+**1. Using hook**
+
 ```tsx
-import {useNavigate} from "react-hook-guard";
+import {useNavigate} from "react-router-map";
 import {useEffect} from "react";
 
 const HaveNavigateComponent = () => {
@@ -256,4 +258,62 @@ const HaveNavigateComponent = () => {
         navigate('create');
     }, [navigate]);
 }
+```
+
+**2. Using browserHistory**
+
+```tsx
+
+// index.tsx
+import React from "react";
+import ReactDOM from "react-dom";
+import { Router } from "react-router";
+import { createBrowserHistory } from "history";
+import App from './App';
+
+export const browserHistory = createBrowserHistory();
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Router history={browserHistory}>
+        <App />
+    </Router>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+
+...
+
+// App.tsx
+
+import { browserHistory } from '..';
+
+function App() {
+  return (
+    <div>
+      <button onClick={() => browserHistory.push('/example')}>
+        Navigate
+      </button>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+**3. Using Navigator Helper Class**
+
+```tsx
+import { Navigator } from 'react-router-map';
+
+...
+
+return (
+    <div>
+      <button onClick={() => Navigator.push('yourRouteName')}>
+        Navigate
+      </button>
+    </div>
+);
 ```
